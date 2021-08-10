@@ -3,13 +3,13 @@ module.exports = {
     client: 'pg',
     version: '9.6',
     connection: {
-      host: 'localhost',
-      user: 'postgres',
-      password: 'passwd',
+      host: 'ec2-18-231-124-137.sa-east-1.compute.amazonaws.com',
+      user: 'ubuntu',
+      password: 'trovao152',
       database: 'barriga',
     },
     migrations: {
-      directoriy: 'src/migrations',
+      directory: 'src/migrations',
     },
   },
 };
