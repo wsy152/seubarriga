@@ -19,3 +19,24 @@ test('Deve inserir uma conta com sucesso', () => {
       expect(result.body.name).toBe('Acc #1');
     });
 });
+// eslint-disable-next-line arrow-body-style
+test('Deve Listar todas a contas', () => {
+  app.db('accounts')
+    .insert({ name: 'Acc list', user_id: user.id })
+    .then(() => request(app).get(MAIN_ROUTE))
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body.lenght).toBeGreaterThan(0);
+    });
+});
+// eslint-disable-next-line arrow-body-style
+test('Deve retornar uma conta por ID', () => {
+  return app.db('accounts')
+    .insert({ name: 'Acc by Id', user_id: user.id }, ['id'])
+    .then((acc) => request(app).get(`${MAIN_ROUTE / 1}/${acc[0].id}`))
+    .then((res) => {
+      expect(res.status).toBe(200);
+      expect(res.body.name).toBe('Acc by Id');
+      expect(res.body.user.id).toBe('Acc by Id');
+    });
+});
